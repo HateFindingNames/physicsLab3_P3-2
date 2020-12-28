@@ -1,0 +1,175 @@
+\chapter{Introduction}
+%
+\section{Terms and Definitions}
+    \subsection*{Transmission Line}\label{sec:transmissionLine}
+        %
+        In there most simple form cables are made out of a conducting material to transport electrical energy or signals from point
+        A to point B. The higher the frequency of the signal to transmit, the less the wave nature of can be neglected.
+        %
+    \subsection*{Characteristic Impedance, Velocity Factor and Propagation Speed}
+        %
+        Characteristic impedance: The impedance, when connected to a transmission line, suppresses any reflections and standing
+        waves \cite{ATIS.AmericanTelecomStandards2001}.\par
+        Velocity factor: Relative signal propagation speed inside a transmission line expressed as percent of speed of light.\par
+        Propagation speed: The speed at which a signal propagates through a medium. In case of an electromagnetic signal
+        it applies \( c \leq c_0 \).
+        %
+    \subsection*{Time Domain Reflectometry}
+        %
+        A method to inspect properties of a transmission line i.e. length, characteristic impedance and velocity factor as
+        well as the presence, nature and location of defects.
+        %
+    \subsection*{Avalanche Pulse Generator}
+        %
+        A circuit to generate ultra short pulses on a scale of picoseconds. Its main working principle abuses the avalanche
+        breakdown of a transistor across the collector-emitter line. The breakdown voltage is usually much higher than the
+        voltages during normal operation.
+        %
+    \subsection*{Boost Converter}
+        %
+        A circuit capable of \textit{boosting} a constant current input voltage to a much higher output voltage by repeatedly
+        switching an inductor on and off. The fly back voltage induced by the break down of the magnetic field gets stored in
+        a capacitance and forms the voltage at the output terminals. Hereafter referred to as \textit{BC}.
+        %
+    \subsection*{Pulse Width Modulation}
+        %
+        A constant current switched on and off at a fixed frequency. The time the signal is considered high during one period
+        is called the duty cycle.
+        %
+    \subsection*{Amplitude, Rise Time, Fall Time, Pulse Width}
+        %
+        Amplitude: In a wider sense a term used to characterize repeating phenomena. It is defined as a signals maximum deviation
+        from its arithmetic mean value.\par
+        Rise time: a technical term defined as the time it takes for a system to transition its output from \( 10\% \) to \( 90\% \)
+        of an infinitesimal steep input signal.\par
+        Fall time: definition of rise time applies but with reversed transition.
+        Pulse width: Rising or falling edges are located by identifying the middle point between \( t_{10\%} \) and \( t_{90\%} \).
+        The time distance between the rising and the falling edges middle point is defined as the pulse width.
+        %
+    \subsection*{Bandwidth and Rise Time of an Oscilloscope}
+        %
+        An oscilloscope can be considered as a low-pass filter. The bandwidth is the cut-off frequency \( f_c \)at which the manufacturer
+        guarantees an attenuation of a sinusoidal input signal of \( < \SI{3}{dB} \).\par
+        Using the definitions above the maximum rise time the scope can reliably display calculates by
+        \begin{equation}
+            t_{rise} = t_{90\%} - t_{10\%} = \frac{1}{-2\pi f_c} \ln\left( \frac{1-0.9}{1-0.1} \right) \approx \frac{0.35}{f_c}
+            \label{eq:bandwidth_and_riseTime}
+        \end{equation}
+        %
+\section{Preparation}
+%
+    \subsection{Reflection on a Transmission Line}\label{sec:A1_reflection_on_transmission_line}
+        %
+        \begin{figure}[h]
+            \centering
+            \begin{framed}
+                \textbf{!!! Insert Diagram Here !!!}
+            \end{framed}
+        \end{figure}
+        %
+    \subsection{SPICE-Simulation of a Boost Converter}\label{sec:A2_spice_boost}
+        %
+        \begin{figure}[H]
+            \centering
+            % \includegraphics[width=\textwidth]{Spice/boost_conv/circuit.jpg}
+            \includesvg[inkscapelatex=false, width=\textwidth]{Spice/boost_conv/boost_conv_circuit}
+            \caption[Simulated circuit of a BC.]{Simulated circuit of a BC using \textsc{LTspice}.}
+            \label{fig:simCircuit}
+        \end{figure}
+        %
+        \begin{figure}[H]
+            \centering
+            % \includegraphics[width=\textwidth]{Spice/boost_conv/plot.jpg}
+            \includesvg[inkscapelatex=false, width=\textwidth]{Spice/boost_conv/boost_conv_sim}
+            \caption[Simulated output voltages at various duty cycles]{Plot of the output voltage at \textit{HV}. The voltage is subsequently progressing towards a peak voltage of \( \hat{U}_{HV} \approx \SI{150}{V} \) with rising PWM duty cycle.}
+            \label{fig:plotSimCircuit}
+        \end{figure}
+        %
+    \subsection{Charge/Discharge Time of a Capacitor}\label{sec:A3_charge-discharge-time}
+        %
+        In order to generate ultra-short pulses an avalanche pulse generator (hereafter referred to as APG) circuit as seen in \cref{fig:avalanche_pulse_generator_circuit}
+        is used. This circuit utilizes an NPN-transistors property of a sudden breakdown of its resistance across the collector-emitter path (CE)
+        if a certain threshold voltage \( U_{Br} \) is exceeded.\par
+        %
+        \begin{figure}[h]
+            \centering
+            \includesvg[inkscapelatex=false, width=.3\textwidth]{Spice/avalanche_pulse_gen/avalanche_pulse_gen_circuit}
+            \caption{mycircuit}
+            \label{fig:avalanche_pulse_generator_circuit}
+        \end{figure}
+        %
+        The shown circuits function can be separated into two stages:\par
+        Charging - while the capacitor \( C_5 \) is discharged the voltage across CE equals 0. The capacitor gets charged
+        through the resistor \( R_6 \) until \( U_{C_5} = U_{Br}\). During its operation \( R_5 \) ensures there is no
+        base-current. The time to reach \( U_{Br} \) is calculated by
+        \begin{gather}
+            U_{Br} = U_+ \left( 1 - e^{-\frac{t_{chrg}}{R_6C_5}}\right) \nonumber \\
+            \Leftrightarrow \nonumber \\
+            t_{chrg} = - \ln\left(1 - \frac{U_{Br}}{U_+}\right) \cdot R_6 C_5
+            \label{eq:avalanche_charging_equation}
+        \end{gather}
+        %
+        Discharging - if the voltage across the capacitor is \( \geq U_{Br} \) the resistance across CE suddenly drops close
+        to zero discharging \( C_5 \) through \( R_7 \). \( T_2 \) regenerates as soon as \( U_{C_5} < U_{Br} \). Similar to \cref{eq:avalanche_charging_equation}
+        the time to discharge \( C_5 \) equates to
+        %
+        \begin{gather}
+            U_{C_5} = U_{Br} \left(e^{-\frac{t_{dchrg}}{R_7C_5}}\right) \nonumber \\
+            \Leftrightarrow \nonumber \\
+            t_{dchrg} = -\ln\left( \frac{U_{C_5}}{U_{Br}} \right) \cdot R_7 C_5
+            \label{eq:avalanche_discharging_equation}
+        \end{gather}
+        %
+        Plugging in the values for \(U_{Br} = \SI{65}{V}, U_+ = \SI{75}{V}, U_{C_5} = \SI{5}{V}, C_5 = \SI{2.2}{pF}, R_6 = \SI{1}{M\ohm} \text{ and } R_7 = \SI{51}{\ohm}\)
+        equates to the following charging/discharging times \(t_{chrg}\) and \(t_{dchrg}\):
+        %
+        \begin{align}
+            t_{chrg} &= - \ln\left(1 - \frac{\SI{65}{V}}{\SI{75}{V}}\right) \cdot \SI{10^6}{\ohm} \cdot \SI{2.2 \cdot 10^{-12}}{F} \nonumber \\
+            &\approx \SI{4.43 \cdot 10^{-6}}{s} \label{eq:avalanche_charging_time}\\
+            \nonumber \\
+            t_{dchrg} &= -\ln\left( \frac{\SI{5}{V}}{\SI{65}{V}} \right) \cdot \SI{51}{\ohm} \cdot \SI{2.2 \cdot 10^{-12}}{F} \nonumber \\
+            &\approx \SI{2.88 \cdot 10^{-10}}{s} \label{eq:avalanche_discharging_time}
+        \end{align}
+        %
+        With these numbers, the minimum time per charge/discharge cycle would be the sum of both times. Thus, the maximum number
+        of repetitions per second \(f_{Rep}\) is
+        %
+        \begin{equation}
+            f_{Rep} = \left(t_{chrg} + t_{dchrg}\right)^{-1} \approx \SI{225.7}{kHz}
+        \end{equation}
+        %
+    \subsection{Cable Characteristics of RG-58/U Coaxial Cable}\label{sec:A4_cable_characteristix}% A4
+        %
+        Nominal characteristic impedance: \(\SI{53}{\ohm}\)\par
+        Nominal velocity of propagation: \(69.5\%\)\par
+        Nominal delay (translates to the inverse of the absolute speed of propagation): \(\SI{4.85588}{\nicefrac{ns}{m}}\)\par
+        The values above are taken from the technical data sheet \cite{Belden.RG-58/U.CoaxCable.Datasheet}.
+        %
+    \subsection{Determining the Suitability of the Oscilloscope}\label{sec:A5_oscopes_suitability}% A5
+        %
+        The oscilloscope at hand is labeled with a bandwidth of \( B = \SI{200}{MHz} \). Following \cref{eq:bandwidth_and_riseTime}
+        signals faster than
+        %
+        \begin{equation}
+            t_{rise_{min}} \approx \frac{0.35}{\SI{200}{MHz}} \approx \SI{1.75}{ns}
+        \end{equation}
+        %
+        appear lower in amplitude and wider in their pulse width. In \cref{fig:low-pass-simulation} a simulation is done
+        sending 
+        %
+        \begin{figure}[h]
+            \centering
+            \includesvg[inkscapelatex=false, width=\textwidth]{Spice/pulse_attenuation/pulse_attenuation_sim}
+            \caption[Simulation of pulses with varying rise times]{Simulation of pulses with varying rise times sent through a low-pass filter. The rise times seen are \SI{0.175}{ns}, \SI{1.75}{ns} and \SI{8.75}{ns}.
+            The doted line represents the original (ideal) pulses. The solid blue line shows the waveform as seen on the simulated oscilloscope.}
+            \label{fig:low-pass-simulation}
+        \end{figure}
+        %
+    \subsection{Sampling Rate}\label{sec:A6:sampling_rate}% A6
+    %
+    In addition to the Bandwidth there is another key parameter considering oscilloscopes - the sampling rate. The sampling rate
+    is the rate at which an incoming signal gets sampled by the internal ADC and is expressed as samples/second (\SI{}{\nicefrac{sa}{s}}). Possible
+    errors would be missing details or a false reconstruction of a too low frequency also known as aliasing.
+    According to the \textsc{Nyquist-Shannon}-Theorem, the maximum frequency to be sampled should be a little less than
+    half of the sampling rate in order to still get a feasible representation \cite{Eichler.2016}. 
+    %
