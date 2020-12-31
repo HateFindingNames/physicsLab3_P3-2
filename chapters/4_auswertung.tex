@@ -2,7 +2,7 @@
 %
 \section{Boost Converter}
     The characteristic curve of the BC is examined. In \cref{fig:characteristic-curve-of-the-boost-converter}
-    the output voltage is plotted against the duty cycle. \textsc{SciDAVis} returns the linear fit of the measuring points as
+    the output voltage is plotted against the duty cycle. \textsc{SciDAVis} returns the linear fit of the measuring points as\par
     %
     \begin{figure}[h]
         \centering
@@ -13,17 +13,17 @@
     \end{figure}
     %
     \begin{equation}
-        U_{out}(dc)=\frac{\SI{1.51}{V}}{\SI{1}{\percent}} \cdot dc + \SI{9.07}{V}
-    \end{equation}
+        U_{+}(dc)=\frac{\SI{1.51}{V}}{\SI{100}{\percent}} \cdot dc + \SI{9.07}{V}
+    \end{equation}\par
     %
     If the output voltages are compared with the simulated ones, there is observed a deviation of nearly \SI{10}{V} in the
-    higher voltage area. The lower voltages, however, are similar.
+    higher voltage area. The lower voltages, however, are similar.\par
     %
 \section{Avalanche Pulse Generator}
     The signal in \cref{subfig:osci:avalanche_pulse_signal} is the first that appears after increasing the voltage to the minimum
     voltage $ U_{min}=\SI{70}{V} $. As discussed in \cref{sec:A3_charge-discharge-time} the time period at which the pulses
     occur and, thus, the repetition frequency is a function of the BC's output voltage \( U_+ \). Examining the
-    actual behavior yields \cref{fig:repetition-frequency} (see \cref{subtab:3-1_duty_vs_voltage} for reference).
+    actual behavior yields \cref{fig:repetition-frequency} (see \cref{subtab:3-1_duty_vs_voltage} for reference).\par
     %
     \begin{figure}[H]
         \centering
@@ -37,18 +37,18 @@
     is larger by a factor. In the diagram in \cref{fig:repetition-frequency} the value is around
     $ \SI{90}{kHz} $. So there must be some deviations.\par\medskip
     Next the characteristics of the pulse at a voltage of $ U=\SI{75}{V} $ are examined. \Cref{subfig:osci:pulsuntersuchung}
-    gives the following:
+    gives the following:\par
     %
     \begin{align}
         \text{Amplitude:}\qquad \hat{U}&=\SI{7.12}{V}\\
         \text{Rise time:}\qquad t_r&=\SI{2.33}{ns}\\
         \text{Fall time:}\qquad t_f&=\SI{7.08}{ns}\\
         \text{Pulse width:}\qquad t_w&=\SI{6.26}{ns}
-    \end{align}
+    \end{align}\par
     %
-    In comparison to a wave form captured with an oscilloscope of \SI{500}{MHz}, it can be seen that the secondary pulsations get suppressed
+    In comparison to a wave form captured with an oscilloscope with a Bandwidth of \SI{500}{MHz}, it can be seen that the secondary pulsations get suppressed
     quite significantly. Moreover, the signal features higher rise and fall time as well as having a lower amplitude.
-    This is an expected behavior as discussed in \cref{sec:A5_oscopes_suitability}.
+    This is an expected behavior as discussed in \cref{sec:A5_oscopes_suitability}.\par
     %
     \begin{figure}[H]
         \centering
@@ -60,14 +60,14 @@
 \section{Signal Propagation}
 %
     \subsection{Propagation Time}
-        The propagation speed of a signal through a transmission line with known length is given by
+        The propagation speed of a signal through a transmission line with known length is given by\par
         %
         \begin{equation}
             c_p=\frac{l}{t}
             \label{eq:propagation_speed}
-        \end{equation}
+        \end{equation}\par
         %
-        The measured propagation times and the calculated propagation speeds are summarized in \cref{tab:delayed_signal}
+        The measured propagation times and the calculated propagation speeds are summarized in \cref{tab:delayed_signal}\par
         %
         \begin{table}[H]
             \caption{Delayed signal}
@@ -82,46 +82,44 @@
             \label{tab:delayed_signal}
         \end{table}
         %
-        The error in propagation speed can be determined as follows:
+        The error in propagation speed can be determined as follows:\par
         %
         \begin{align}
             \Delta c_p&=\left|\frac{\partial c_p}{\partial l}\right|\cdot \Delta l + \left|\frac{\partial c_p}{\partial t}\right|\cdot \Delta t \nonumber \\
             &=\frac{1}{t}\cdot \Delta l + \frac{l}{t^2} \cdot \Delta t
             \label{eq:cp_dev}
-        \end{align}
+        \end{align}\par
         %
-        For cable no. 1 in \cref{tab:delayed_signal} e.g.:
+        For cable no. 1 in \cref{tab:delayed_signal} e.g.:\par
         %
         \begin{align}
-            \Delta c_{P,1}&=\frac{1}{\SI{22.6}{\cdot 10^{-9}s}}\cdot \SI{0.05}{m} + \frac{\SI{4.95}{m}}{(\SI{22.6}{\cdot 10^{-9}s})^2} \cdot \SI{1}{\cdot 10^{-9}s} \nonumber \\
+            \Delta c_{p,1}&=\frac{1}{\SI{22.6}{\cdot 10^{-9}s}}\cdot \SI{0.05}{m} + \frac{\SI{4.95}{m}}{(\SI{22.6}{\cdot 10^{-9}s})^2} \cdot \SI{1}{\cdot 10^{-9}s} \nonumber \\
             &=\SI{0.02}{\cdot 10^8\frac{m}{s}}+\SI{0.10}{\cdot 10 ^8\frac{m}{s}} \nonumber \\
             &=\SI{0.12}{\cdot 10^8\frac{m}{s}}
-        \end{align}
+        \end{align}\par
         %
     \subsection{Cable Characteristics}
         %
         \cref{subfig:osci:3-3-2_open_reflectionTime} shows the reflected pulse signal and \cref{subfig:osci:3-3-2_shorted} the shorted and reflected
-        pulse signal.
-        %
-        The speed at which an electromagnetic signal propagates through a medium can be calculated by
+        pulse signal. The speed at which an electromagnetic signal propagates through a medium can be calculated by\par
         \begin{equation}
             c_p = \left(\sqrt{\varepsilon_0\varepsilon_r}\right)^{-1} \left(\sqrt{\mu_0\mu_r}\right)^{-1}
-        \end{equation}
+        \end{equation}\par
         where \( \left(\sqrt{\varepsilon_0\mu_0}\right)^{-1} \) is the speed of light. Sent through a medium other than
         vacuum the electric and magnetic properties of the medium reduce the propagation speed by a factor of \( \left(\sqrt{\varepsilon_r\mu_r}\right)^{-1} \) \cite{Halliday.2005}.
-        A metric to quantify the relative speed of propagation is the velocity factor:
+        A metric to quantify the relative speed of propagation is the velocity factor:\par
         \begin{equation}
             VF = \frac{c_p}{c_0}
-        \end{equation}
+        \end{equation}\par
         At the minimum amplitude of the reflected pulse, the resistance \( R_{Term} \) equals \( Z_0 \).\par
-        The determined and calculated characteristic values are summarized in the following table:
+        The determined and calculated characteristic values are summarized in the following table:\par
         %
         \begin{table}[h]
             \caption{Reflected signal}
             \begin{adjustbox}{width=\textwidth,keepaspectratio}
                 \begin{tabular}{@{}llllllll@{}}
                     \toprule
-                    Cable no.   & $ l $ \big/ \SI{}{m}  & $ \tau_0 $ \big/ \SI{}{ns}    & $ \tau_s $ \big/ \SI{}{ns}    & $ c_p $ \big/ $ \SI{}{\frac{m}{s}} $  & $ VF $ \big/ \%   & $ Z_0 $ \big/ $\Omega$    & $\varepsilon_R$ \\ \midrule
+                    Cable no.   & $ l $ \big/ \SI{}{m}  & $ \tau_0 $ \big/ \SI{}{ns}    & $ \tau_s $ \big/ \SI{}{ns}    & $ c_p $ \big/ $ \SI{}{\frac{m}{s}} $  & $ VF $ \big/ \%   & $ Z_0 $ \big/ $\Omega$    & $\varepsilon_r$ \\ \midrule
                     1           & $ 4.95 \pm 0.05 $     & $ 44.8 \pm 1 $                & $ 44.8 \pm 1 $                & $ (2.21\pm 0.07)\cdot 10^8 $          & $ 73.7 \pm 2.3 $  & 80.2                      & $ 1.84 \pm 0.11 $ \\
                     2           & $ 10.04 \pm 0.05 $    & $ 89.6 \pm 1 $                & $ 90.4 \pm 1 $                & $ (2.24\pm 0.04)\cdot 10^8 $          & $ 74.7 \pm 1.3 $  & 56.0                      & $ 1.79 \pm 0.06 $ \\
                     3           & $ 0.77 \pm 0.01 $     & $ 8.4 \pm 1 $                 & $ 10.8 \pm 1 $                & $ (1.83\pm 0.34)\cdot 10^8 $          & $ 61.0 \pm 11.3 $ & 56.4                      & $ 2.69 \pm 1.00 $ \\ \bottomrule
@@ -130,30 +128,30 @@
             \label{tab:reflected_signal}
         \end{table}
         %
-        The deviation of $ c_p $ can be determined similar to \cref{eq:cp_dev}, but with a factor of 2. The delta in $ VF $ as follows:
+        The deviation of $ c_p $ can be determined similar to \cref{eq:cp_dev}, but with a factor of 2. The delta in $ VF $ as follows:\par
         %
         \begin{align}
             \Delta VF&=\left|\frac{\partial VF}{\partial c_p}\right|\cdot \Delta c_p \nonumber \\
             &=\frac{1}{c_0}\cdot \Delta c_p
-        \end{align}
+        \end{align}\par
         %
-        For cable no. 1 in \cref{tab:reflected_signal} e.g.:
+        For cable no. 1 in \cref{tab:reflected_signal} e.g.:\par
         %
         \begin{equation}
             \Delta VF_1=\frac{1}{\SI{3}{\cdot 10^8 \frac{m}{s}}}\cdot \SI{0.07}{\frac{m}{s}}=2.3\%
-        \end{equation}
+        \end{equation}\par
         %
-        And for $ \varepsilon_R $:
+        And for $ \varepsilon_r $:\par
         %
         \begin{equation}
-            \Delta \varepsilon_R = \left|\frac{\partial \varepsilon_R}{\partial VF}\right|\cdot \Delta VF = \frac{2}{VF^3} \cdot \Delta VF
-        \end{equation}
+            \Delta \varepsilon_r = \left|\frac{\partial \varepsilon_R}{\partial VF}\right|\cdot \Delta VF = \frac{2}{VF^3} \cdot \Delta VF
+        \end{equation}\par
         %
         So for the first cable in \cref{tab:reflected_signal}:
         %
         \begin{equation}
-            \Delta \varepsilon_{R,1}=\frac{2}{0.737^3}\cdot 0.023=0.11
-        \end{equation}
+            \Delta \varepsilon_{r,1}=\frac{2}{0.737^3}\cdot 0.023=0.11
+        \end{equation}\par
         %
         If the values are compared with the data sheet from the manufacturer, there can be seen some similarities and differences.
         The determined velocity factor of cable no. 1 and 2 is very close to the stated one (69.5\%). The third cable is slightly
@@ -163,45 +161,45 @@
         %
     \subsection{Time Domain Reflectometry}
         For determining the unknown length and the position of the fault of the cable, the equation for the propagation speed has
-        to be transformed to the length as
+        to be transformed to the length as\par
         %
         \begin{equation}
             l=\frac{1}{2}\cdot c_p \cdot \tau
             \label{eq:length}
-        \end{equation}
+        \end{equation}\par
         %
         $\tau_{total}$ has been measured as \SI{276}{ns} and $\tau_{fault}$ as \SI{256}{ns}.
         For the propagation speed the mean value $ \bar{c_p} = \SI{2.09 \cdot 10^8}{\frac{m}{s}} $ is used. The values inserted in
-        \cref{eq:length} results:
+        \cref{eq:length} results:\par
         %
         \begin{align*}
             l_{total}&=\frac{1}{2}\cdot\SI{2.09}{\cdot 10^8\frac{m}{s}}\cdot \SI{276}{\cdot 10^{-9} s}=\SI{28.84}{m}\\
             l_{fault}&=\frac{1}{2}\cdot\SI{2.09}{\cdot 10^8\frac{m}{s}}\cdot \SI{256}{\cdot 10^{-9} s}=\SI{26.75}{m}
-        \end{align*}
+        \end{align*}\par
         %
-        The deviation is determined with the following equation:
+        The deviation is determined with the following equation:\par
         %
         \begin{align}
             \Delta l&=\left|\frac{\partial l}{\partial c_p}\right|\cdot \Delta c_p + \left|\frac{\partial l}{\partial \tau}\right|\cdot \Delta \tau\\
             &=\frac{1}{2}\cdot \tau \cdot \Delta c_p + \frac{1}{2}\cdot c_p \cdot \Delta \tau
-        \end{align}
+        \end{align}\par
         %
-        For the total length and the position of the defect:
+        For the total length and the position of the defect:\par
         \begin{align*}
             \Delta l_{total}&=\frac{1}{2} \cdot\SI{276}{\cdot 10^{-9}s}\cdot \SI{0.15}{\cdot 10^8\frac{m}{s}}  + \frac{1}{2}\cdot \SI{2.09}{\cdot 10^8\frac{m}{s}} \cdot\SI{1}{\cdot 10^{-9}s}\\
             &=\SI{2.07}{m}+\SI{0.10}{m}\\
             &=\SI{2.17}{m}\\
             \\
             \Delta l_{fault}&=\SI{2.02}{m}
-        \end{align*}
+        \end{align*}\par
         %
-        Summarized the total length is
+        Summarized the total length is\par
         %
         \begin{equation}
             l_{total}=\SI{28.8}{m} \pm \SI{2.2}{m}
-        \end{equation}
+        \end{equation}\par
         %
-        and the position of the fault is at
+        and the position of the fault is at\par
         %
         \begin{equation}
             l_{fault}=\SI{26.8}{m} \pm \SI{2.0}{m}

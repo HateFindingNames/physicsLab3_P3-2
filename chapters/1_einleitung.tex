@@ -50,7 +50,7 @@
         %
         An oscilloscope can be considered as a low-pass filter. The bandwidth is the cut-off frequency \( f_c \)at which the manufacturer
         guarantees an attenuation of a sinusoidal input signal of \( < \SI{3}{dB} \).\par
-        Using the definitions above the maximum rise time the scope can reliably display calculates by
+        Using the definitions above the maximum rise time the scope can reliably display calculates by\par
         \begin{equation}
             t_{rise} = t_{90\%} - t_{10\%} = \frac{1}{-2\pi f_c} \ln\left( \frac{1-0.9}{1-0.1} \right) \approx \frac{0.35}{f_c}
             \label{eq:bandwidth_and_riseTime}
@@ -60,18 +60,25 @@
 %
     \subsection{Reflection on a Transmission Line}\label{sec:A1_reflection_on_transmission_line}
         %
+        % \begin{figure}[h]
+        %     \centering
+        %     \subfloat[Waveform of a reflex on an open transmission line.\label{subfig:A1_reflex_open_trans_line}]{\includegraphics[width=.6\textwidth]{referenzen/reflex_open_transmission_line.jpg}}\\%
+        %     \subfloat[Waveform of a reflex on a shorted transmission line.\label{subfig:A1_reflex_shorted_trans_line}]{\includegraphics[width=.6\textwidth]{referenzen/reflex_shorted_transmission_line.jpg}}\\%
+        %     \subfloat[Ideally on a properly terminated transmission line the reflex gets suppressed entirely.\label{subfig:A1_reflex_proper_trans_line}]{\includegraphics[width=.6\textwidth]{referenzen/reflex_properly_transmission_line.jpg}}%
+        %     \caption[Types of a reflection on a transmission line]{Types of a reflection on a transmission line \cite{TDR_tutorial.GraniteIslandGroup.20170531}.}
+        % \end{figure}
         \begin{figure}[h]
             \centering
-            \begin{framed}
-                \textbf{!!! Insert Diagram Here !!!}
-            \end{framed}
+            \subfloat[Waveform of a reflex on an open transmission line.\label{subfig:A1_reflex_open_trans_line}]{\includesvg[inkscapelatex=false, width=.8\textwidth]{referenzen/dummy}}\\%
+            \subfloat[Waveform of a reflex on a shorted transmission line.\label{subfig:A1_reflex_shorted_trans_line}]{\includesvg[inkscapelatex=false, width=.8\textwidth]{referenzen/dummy}}\\%
+            \subfloat[Ideally on a properly terminated transmission line the reflex gets suppressed entirely.\label{subfig:A1_reflex_proper_trans_line}]{\includesvg[inkscapelatex=false, width=.8\textwidth]{referenzen/dummy}}%
+            \caption[Types of a reflection on a transmission line]{Types of a reflection on a transmission line \cite{TDR_tutorial.GraniteIslandGroup.20170531}.}
         \end{figure}
         %
     \subsection{SPICE-Simulation of a Boost Converter}\label{sec:A2_spice_boost}
         %
         \begin{figure}[H]
             \centering
-            % \includegraphics[width=\textwidth]{Spice/boost_conv/circuit.jpg}
             \includesvg[inkscapelatex=false, width=\textwidth]{Spice/boost_conv/boost_conv_circuit}
             \caption[Simulated circuit of a BC.]{Simulated circuit of a BC using \textsc{LTspice}.}
             \label{fig:simCircuit}
@@ -79,7 +86,6 @@
         %
         \begin{figure}[H]
             \centering
-            % \includegraphics[width=\textwidth]{Spice/boost_conv/plot.jpg}
             \includesvg[inkscapelatex=false, width=\textwidth]{Spice/boost_conv/boost_conv_sim}
             \caption[Simulated output voltages at various duty cycles]{Plot of the output voltage at \textit{HV}. The voltage is subsequently progressing towards a peak voltage of \( \hat{U}_{HV} \approx \SI{150}{V} \) with rising PWM duty cycle.}
             \label{fig:plotSimCircuit}
@@ -101,24 +107,24 @@
         The shown circuits function can be separated into two stages:\par
         Charging - while the capacitor \( C_5 \) is discharged the voltage across CE equals 0. The capacitor gets charged
         through the resistor \( R_6 \) until \( U_{C_5} = U_{Br}\). During its operation \( R_5 \) ensures there is no
-        base-current. The time to reach \( U_{Br} \) is calculated by
+        base-current. The time to reach \( U_{Br} \) is calculated by\par
         \begin{gather}
             U_{Br} = U_+ \left( 1 - e^{-\frac{t_{chrg}}{R_6C_5}}\right) \nonumber \\
             \Leftrightarrow \nonumber \\
             t_{chrg} = - \ln\left(1 - \frac{U_{Br}}{U_+}\right) \cdot R_6 C_5
             \label{eq:avalanche_charging_equation}
-        \end{gather}
+        \end{gather}\par
         %
         Discharging - if the voltage across the capacitor is \( \geq U_{Br} \) the resistance across CE suddenly drops close
         to zero discharging \( C_5 \) through \( R_7 \). \( T_2 \) regenerates as soon as \( U_{C_5} < U_{Br} \). Similar to \cref{eq:avalanche_charging_equation}
-        the time to discharge \( C_5 \) equates to
+        the time to discharge \( C_5 \) equates to\par
         %
         \begin{gather}
             U_{C_5} = U_{Br} \left(e^{-\frac{t_{dchrg}}{R_7C_5}}\right) \nonumber \\
             \Leftrightarrow \nonumber \\
             t_{dchrg} = -\ln\left( \frac{U_{C_5}}{U_{Br}} \right) \cdot R_7 C_5
             \label{eq:avalanche_discharging_equation}
-        \end{gather}
+        \end{gather}\par
         %
         Plugging in the values for \(U_{Br} = \SI{65}{V}, U_+ = \SI{75}{V}, U_{C_5} = \SI{5}{V}, C_5 = \SI{2.2}{pF}, R_6 = \SI{1}{M\ohm} \text{ and } R_7 = \SI{51}{\ohm}\)
         equates to the following charging/discharging times \(t_{chrg}\) and \(t_{dchrg}\):
@@ -129,10 +135,10 @@
             \nonumber \\
             t_{dchrg} &= -\ln\left( \frac{\SI{5}{V}}{\SI{65}{V}} \right) \cdot \SI{51}{\ohm} \cdot \SI{2.2 \cdot 10^{-12}}{F} \nonumber \\
             &\approx \SI{2.88 \cdot 10^{-10}}{s} \label{eq:avalanche_discharging_time}
-        \end{align}
+        \end{align}\par
         %
         With these numbers, the minimum time per charge/discharge cycle would be the sum of both times. Thus, the maximum number
-        of repetitions per second \(f_{Rep}\) is
+        of repetitions per second \(f_{Rep}\) is\par
         %
         \begin{equation}
             f_{Rep} = \left(t_{chrg} + t_{dchrg}\right)^{-1} \approx \SI{225.7}{kHz}
@@ -152,10 +158,12 @@
         %
         \begin{equation}
             t_{rise_{min}} \approx \frac{0.35}{\SI{200}{MHz}} \approx \SI{1.75}{ns}
-        \end{equation}
+        \end{equation}\par
         %
         appear lower in amplitude and wider in their pulse width. In \cref{fig:low-pass-simulation} a simulation is done
-        sending 
+        sending signals with rise times of \( t_{rise} \in \left\lbrace 0.1t_{rise_{min}}, t_{rise} = t_{rise_{min}}, t_{rise} = 5t_{rise_{min}} \right\rbrace \).
+        In each case \( t_{fall} = t_{rise} \) applies. The accompanying simulation circuit can be found in the appendix
+        (\cref{fig:pulse_attenuation_sim_circuit})\par
         %
         \begin{figure}[h]
             \centering
